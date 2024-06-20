@@ -5,6 +5,7 @@
 * gross salary, and net salary. 
 */
 
+//  Function to calculate net salary
 function netSalaryCalculator() {
     let basicSalary = parseFloat(prompt("Enter your basic salary..."));
     let benefits = parseFloat(prompt("Enter your benefits..."));
@@ -16,22 +17,23 @@ function netSalaryCalculator() {
         alert("Kindly input valid basic salary and benefits");
         return;
     }
-
+    // If valid, proceed to display required parameters
     else {
-        // let myNhif = nhifCalculator(grossPay)
         let myNssf = nssfCalculator(grossPay)
         let myPaye = payeCalculator(grossPay)
         let myNhif = nhifCalculator(grossPay)
-        netSalary =  grossPay - myPaye - myNhif
+        netSalary = grossPay - myPaye - myNhif
 
         alert(`Gross Salary: ${grossPay} \nIncome Tax: ${myPaye} \nNSSF Deductions: ${myNssf} \nNHIF Deductions: ${myNhif} \nNet Salary: ${netSalary}`);
     }
 }
-
+//  Function to calculate paye
 function payeCalculator(grossPay) {
+    // Taxable income & paye
     let taxableIncome = grossPay - nssfCalculator(grossPay);
     let paye = 0;
 
+    // PAYE rate categories
     if (taxableIncome <= 24000) {
         paye = taxableIncome * 0.1;
     } else if (taxableIncome <= 32333) {
@@ -46,10 +48,11 @@ function payeCalculator(grossPay) {
 
     return paye;
 }
-
+//  Function to calculate nhif deductions
 function nhifCalculator(grossPay) {
     let nhifDeductions = 0;
 
+    // NHIF rate categories
     if (grossPay <= 5999) {
         nhifDeductions = 150;
     }
@@ -104,11 +107,12 @@ function nhifCalculator(grossPay) {
 
     return nhifDeductions;
 }
-
+//  Function to calculate nssf deductions
 function nssfCalculator(grossPay) {
     const nssfRate = 0.06;
     let totalNSSFDeductions = 0;
 
+    // NSSF Tier categories
     if (grossPay <= 36000) {
         totalNSSFDeductions = grossPay * nssfRate;
     } else {
